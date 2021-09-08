@@ -52,7 +52,10 @@ class User {
   /** All: basic info on all users:
    * [{username, first_name, last_name, phone}, ...] */
 
-  static async all() { }
+  static async all() {
+    let res = await db.query("SELECT username, first_name, last_name, phone FROM users")
+    return res.rows
+   }
 
   /** Get: get user by username
    *
@@ -63,7 +66,10 @@ class User {
    *          join_at,
    *          last_login_at } */
 
-  static async get(username) { }
+  static async get(username) {
+    let res = await db.query("SELECT * FROM users WHERE username = $1", [username])
+    return res.rows[0]
+   }
 
   /** Return messages from this user.
    *
@@ -73,7 +79,10 @@ class User {
    *   {username, first_name, last_name, phone}
    */
 
-  static async messagesFrom(username) { }
+  static async messagesFrom(username) {
+    let res = await db.query("SELECT * FROM messages WHERE from_username = $1", [username])
+    return res.rows
+  }
 
   /** Return messages to this user.
    *
@@ -83,7 +92,10 @@ class User {
    *   {id, first_name, last_name, phone}
    */
 
-  static async messagesTo(username) { }
+  static async messagesTo(username) {
+    let res = await db.query("SELECT * FROM messages WHERE to_username = $1", [username])
+    return res.rows
+   }
 }
 
 
