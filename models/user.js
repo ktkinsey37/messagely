@@ -44,7 +44,7 @@ class User {
     if (!user){
       throw new ExpressError(`No such user: ${username}`, 404);
     }
-    let res = await db.query("INSERT INTO users (last_login_at) VALUES (current_timestamp) WHERE username = $1 RETURNING (username, last_login_at)", [username])
+    let res2 = await db.query("INSERT INTO users (last_login_at) VALUES (current_timestamp) WHERE username = $1 RETURNING (username, last_login_at)", [username])
 
 
    }
